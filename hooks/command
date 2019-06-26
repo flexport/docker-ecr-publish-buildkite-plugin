@@ -81,6 +81,13 @@ read_list_property() {
   [[ ${#result[@]} -gt 0 ]] || return 1
 }
 
+# Shorthand for reading env config
+function plugin_read_config() {
+  local var="$BUILDKITE_PLUGIN_DOCKER_ECR_PUBLISH_{1}"
+  local default="${2:-}"
+  echo "${!var:-$default}"
+}
+
 push_tags() {
   local tags=("${@}")
 
@@ -116,7 +123,7 @@ read_tags 'TAGS'
 if [[ ${BUILDKITE_BRANCH} == "${BUILDKITE_PIPELINE_DEFAULT_BRANCH}" ]]; then
   read_build_args 'DEFAULT_ARGS'
   read_tags 'DEFAULT_TAGS'
-  if [ -z "$ECR_PUBLISH_SKIP_LATEST" ]; then
+  if [[ "$(plugin_read_config SKIP_LATEST_PUSH "false")" == "false" ]] ; then
     tags+=('latest')
   fi
 else
