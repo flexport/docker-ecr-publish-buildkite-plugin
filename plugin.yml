@@ -17,6 +17,8 @@ configuration:
       type: [array, string]
     default-tags:
       type: [array, string]
+    skip-latest-push:
+      type: boolean
     dockerfile:
       type: string
     ecr-name:
