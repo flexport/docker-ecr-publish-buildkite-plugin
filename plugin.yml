@@ -23,6 +23,8 @@ configuration:
       type: string
     ecr-name:
       type: string
+    skip-build-number-push:
+      type: boolean
     tags:
       type: [array, string]
   required: ['ecr-name']
