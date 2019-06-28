@@ -21,6 +21,8 @@ configuration:
       type: boolean
     dockerfile:
       type: string
+    ecr-region:
+      type: string
     ecr-name:
       type: string
     skip-build-number-push:
